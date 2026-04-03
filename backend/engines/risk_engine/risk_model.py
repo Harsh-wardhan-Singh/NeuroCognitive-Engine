@@ -1,6 +1,4 @@
 import math
-
-
 def linear_combination(features):
 	mastery, confidence, recency, accuracy = features
 	return (
@@ -10,12 +8,8 @@ def linear_combination(features):
 		+ accuracy * -2.5
 		+ 1.5
 	)
-
-
 def sigmoid(z):
 	return 1 / (1 + math.exp(-z))
-
-
 def predict_probability(features):
 	z = linear_combination(features)
 	return sigmoid(z)

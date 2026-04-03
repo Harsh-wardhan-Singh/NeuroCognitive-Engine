@@ -1,6 +1,4 @@
 import math
-
-
 def apply_decay(
 	mastery: float,
 	last_seen_timestamp: float,
