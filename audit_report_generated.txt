@@ -1,0 +1,551 @@
+File: .env
+Purpose: Environment variables for runtime secrets/config.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: .gitignore
+Purpose: Git ignore rules.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: .vscode/settings.json
+Purpose: Data/config JSON asset.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: ai_generation.md
+Purpose: Specification/architecture document.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: backend/api/deps.py
+Purpose: FastAPI dependency providers/auth extraction.
+Contains: func get_current_user_id, func get_db_session
+Dependencies (imports): db.database.get_db, fastapi.Depends, fastapi.HTTPException, fastapi.security.HTTPAuthorizationCredentials, fastapi.security.HTTPBearer, services.auth_service.get_user_id_from_token, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/api/main.py
+Purpose: FastAPI app assembly.
+Contains: None (empty file).
+Dependencies (imports): api.routes.auth.router, api.routes.quiz.router, fastapi.FastAPI
+Used by: No internal imports detected
+
+File: backend/api/routes/auth.py
+Purpose: FastAPI route handlers.
+Contains: func login_route, func signup_route
+Dependencies (imports): api.deps.get_db_session, fastapi.APIRouter, fastapi.Depends, fastapi.HTTPException, schemas.auth_schemas.LoginRequest, schemas.auth_schemas.LoginResponse, schemas.auth_schemas.SignupRequest, schemas.auth_schemas.SignupResponse, services.auth_service.login, services.auth_service.signup, sqlalchemy.orm.Session
+Used by: No internal imports detected
+
+File: backend/api/routes/auth_routes.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/api/routes/quiz.py
+Purpose: FastAPI route handlers.
+Contains: func end_session_route, func start_session_route, func submit_answer_route
+Dependencies (imports): api.deps.get_current_user_id, api.deps.get_db_session, fastapi.APIRouter, fastapi.Depends, fastapi.HTTPException, orchestrator.quiz_orchestrator.end_session, orchestrator.quiz_orchestrator.start_session, orchestrator.quiz_orchestrator.submit_answer, orchestrator.schemas.StartSessionRequest, orchestrator.schemas.SubmitAnswerRequest, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/api/routes/quiz_routes.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/api/routes/user_routes.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/api/tests/test_auth_routes.py
+Purpose: Automated test module.
+Contains: func _build_test_app_and_db, func _override_get_db, func run_all, func test_signup_and_login_routes
+Dependencies (imports): api.deps.get_db_session, api.routes.auth.router, db.database, fastapi.FastAPI, fastapi.testclient.TestClient, os, pathlib.Path, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sqlalchemy.pool.StaticPool, sys
+Used by: No internal imports detected
+
+File: backend/api/tests/test_auth_schemas.py
+Purpose: Automated test module.
+Contains: func run_all, func test_login_response_schema, func test_signup_request_schema, func test_signup_response_schema
+Dependencies (imports): pathlib.Path, schemas.auth_schemas.LoginRequest, schemas.auth_schemas.LoginResponse, schemas.auth_schemas.SignupRequest, schemas.auth_schemas.SignupResponse, sys, uuid
+Used by: No internal imports detected
+
+File: backend/api/tests/test_deps.py
+Purpose: Automated test module.
+Contains: func run_all, func test_get_current_user_id_from_bearer_token
+Dependencies (imports): api.deps.get_current_user_id, fastapi.security.HTTPAuthorizationCredentials, os, pathlib.Path, services.auth_service.create_access_token, sys, uuid.uuid4
+Used by: No internal imports detected
+
+File: backend/api/tests/test_main_app.py
+Purpose: Automated test module.
+Contains: func run_all, func test_app_includes_auth_and_quiz_routes
+Dependencies (imports): api.main.app, pathlib.Path, sys
+Used by: No internal imports detected
+
+File: backend/api/tests/test_quiz_routes.py
+Purpose: Automated test module.
+Contains: func _build_test_app_and_db, func _mock_generate_explanation, func _mock_generate_question, func _override_get_db, func run_all, func test_protected_quiz_flow_routes
+Dependencies (imports): api.deps.get_db_session, api.routes.auth.router, api.routes.quiz.router, db.database, fastapi.FastAPI, fastapi.testclient.TestClient, orchestrator.quiz_orchestrator, os, pathlib.Path, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sqlalchemy.pool.StaticPool, sys
+Used by: No internal imports detected
+
+File: backend/config/constants.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/config/settings.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/data/concept_graphs/probability_graph.json
+Purpose: Data/config JSON asset.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: backend/data/question_bank/probability_questions.json
+Purpose: Data/config JSON asset.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: backend/db/crud.py
+Purpose: Database CRUD operations.
+Contains: func create_auth_user, func create_session, func create_session_question, func create_user, func get_attempt_stats_for_concept, func get_mastery_state, func get_recent_session_questions, func get_session, func get_session_question, func get_user_by_email, func get_user_by_id, func list_attempts_for_session_window, func list_mastery_states_for_user, func log_attempt, func update_session, func upsert_mastery_state
+Dependencies (imports): datetime.datetime, db.models.Attempt, db.models.MasteryState, db.models.Session, db.models.SessionQuestion, db.models.User, db.schemas.AttemptCreate, db.schemas.AuthUserCreate, db.schemas.MasteryStateRead, db.schemas.MasteryUpdate, db.schemas.SessionCreate, db.schemas.SessionQuestionCreate, db.schemas.SessionRead, db.schemas.SessionUpdate, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/db/database.py
+Purpose: DB engine/session setup.
+Contains: func get_db
+Dependencies (imports): dotenv.load_dotenv, os, sqlalchemy.create_engine, sqlalchemy.orm.declarative_base, sqlalchemy.orm.sessionmaker
+Used by: No internal imports detected
+
+File: backend/db/init_db.py
+Purpose: DB table initialization entrypoint.
+Contains: func init_db
+Dependencies (imports): db.database.Base, db.database.engine, db.models.Attempt, db.models.MasteryState, db.models.Session, db.models.SessionQuestion, db.models.User, pathlib.Path, sys
+Used by: No internal imports detected
+
+File: backend/db/models.py
+Purpose: SQLAlchemy ORM models/tables.
+Contains: class Attempt, class MasteryState, class Session, class SessionQuestion, class User
+Dependencies (imports): datetime.datetime, db.database.Base, sqlalchemy.Boolean, sqlalchemy.DateTime, sqlalchemy.Float, sqlalchemy.ForeignKey, sqlalchemy.Integer, sqlalchemy.JSON, sqlalchemy.PrimaryKeyConstraint, sqlalchemy.String, sqlalchemy.UniqueConstraint, sqlalchemy.Uuid, sqlalchemy.orm.Mapped, sqlalchemy.orm.mapped_column, uuid
+Used by: No internal imports detected
+
+File: backend/db/schemas.py
+Purpose: Pydantic DB contracts.
+Contains: class AttemptCreate, class AuthUserCreate, class AuthUserRead, class MasteryStateRead, class MasteryUpdate, class SessionCreate, class SessionQuestionCreate, class SessionQuestionRead, class SessionRead, class SessionUpdate, class UserCreate
+Dependencies (imports): datetime.datetime, pydantic.BaseModel, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/db/tests/test_crud.py
+Purpose: Automated test module.
+Contains: func _build_test_session, func run_all, func test_create_auth_user_and_lookup_by_email, func test_create_user_returns_uuid, func test_get_attempt_stats_for_concept, func test_get_mastery_state_returns_3_field_dict, func test_log_attempt_inserts_row, func test_session_create_get_update_flow, func test_session_question_storage_and_correct_option_fetch, func test_session_window_attempts_and_mastery_list, func test_upsert_mastery_state_updates_existing_row
+Dependencies (imports): datetime.datetime, db.crud.create_auth_user, db.crud.create_session, db.crud.create_session_question, db.crud.create_user, db.crud.get_attempt_stats_for_concept, db.crud.get_mastery_state, db.crud.get_recent_session_questions, db.crud.get_session, db.crud.get_session_question, db.crud.get_user_by_email, db.crud.list_attempts_for_session_window, db.crud.list_mastery_states_for_user, db.crud.log_attempt, db.crud.update_session, db.crud.upsert_mastery_state, db.database, db.models.Attempt, db.models.MasteryState, os, pathlib.Path, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sys, uuid
+Used by: No internal imports detected
+
+File: backend/db/tests/test_database.py
+Purpose: Automated test module.
+Contains: func _reload_database_module_with_env, func run_all, func test_database_url_is_required, func test_engine_and_session_creation, func test_get_db_yields_session_object
+Dependencies (imports): importlib, os, pathlib.Path, sys
+Used by: No internal imports detected
+
+File: backend/db/tests/test_init_db.py
+Purpose: Automated test module.
+Contains: func run_all, func test_init_db_creates_all_tables
+Dependencies (imports): importlib, os, pathlib.Path, sqlalchemy.inspect, sys
+Used by: No internal imports detected
+
+File: backend/db/tests/test_models.py
+Purpose: Automated test module.
+Contains: func run_all, func test_attempt_has_correct_column_name, func test_mastery_state_has_composite_key, func test_session_questions_unique_per_session, func test_table_names_exist, func test_user_id_is_uuid_instance, func test_users_has_auth_fields
+Dependencies (imports): datetime.datetime, db.database.Base, db.models.User, os, pathlib.Path, sqlalchemy.create_engine, sqlalchemy.inspect, sqlalchemy.orm.sessionmaker, sys
+Used by: No internal imports detected
+
+File: backend/db/tests/test_schemas.py
+Purpose: Automated test module.
+Contains: func run_all, func test_attempt_create_schema_fields, func test_auth_user_create_schema_fields, func test_mastery_state_read_schema_fields, func test_mastery_update_schema_fields, func test_session_create_schema_fields, func test_session_question_create_schema_fields, func test_session_update_schema_fields, func test_user_create_is_empty_schema
+Dependencies (imports): datetime.datetime, db.schemas.AttemptCreate, db.schemas.AuthUserCreate, db.schemas.MasteryStateRead, db.schemas.MasteryUpdate, db.schemas.SessionCreate, db.schemas.SessionQuestionCreate, db.schemas.SessionUpdate, db.schemas.UserCreate, pathlib.Path, sys, uuid
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/explanation_generator.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func generate_explanation
+Dependencies (imports): engines.ai_generation.llm_client.generate_text, engines.ai_generation.prompt_templates.build_explanation_prompt, json
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/llm_client.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func _extract_raw_text, func generate_text
+Dependencies (imports): dotenv.load_dotenv, os, requests, time
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/prompt_templates.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func build_explanation_prompt, func build_question_prompt
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/question_generator.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func _get_recent_questions_list, func _update_recent_questions, func _validate_question_payload, func generate_question
+Dependencies (imports): collections.deque, engines.ai_generation.llm_client.generate_text, engines.ai_generation.prompt_templates.build_question_prompt, json
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/tests/test_explanation_generator.py
+Purpose: Automated test module.
+Contains: func mock_generate_text, func run_all, func test_generate_explanation_parse_failure_fallback, func test_generate_explanation_valid_json
+Dependencies (imports): engines.ai_generation.explanation_generator
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/tests/test_llm_client.py
+Purpose: Automated test module.
+Contains: class MockResponse, func __init__, func json, func mock_post, func raise_for_status, func run_all, func test_generate_text_fails_after_three_attempts, func test_generate_text_retries_then_success, func test_generate_text_success_chat_completion_shape, func test_generate_text_success_first_try
+Dependencies (imports): engines.ai_generation.llm_client, os
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/tests/test_prompt_templates.py
+Purpose: Automated test module.
+Contains: func run_all, func test_build_explanation_prompt_contains_required_constraints, func test_build_question_prompt_contains_required_constraints, func test_build_question_prompt_includes_recent_questions_block
+Dependencies (imports): engines.ai_generation.prompt_templates.build_explanation_prompt, engines.ai_generation.prompt_templates.build_question_prompt
+Used by: No internal imports detected
+
+File: backend/engines/ai_generation/tests/test_question_generator.py
+Purpose: Automated test module.
+Contains: func mock_generate_text, func run_all, func test_generate_question_algebra_hard, func test_generate_question_probability_easy, func test_generate_question_retries_once_then_succeeds, func test_recent_questions_queue_keeps_only_last_ten
+Dependencies (imports): engines.ai_generation.question_generator
+Used by: No internal imports detected
+
+File: backend/engines/cognitive_engine/confidence_model.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func update_confidence
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/engines/cognitive_engine/dependency_propagation.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func propagate_mastery
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/engines/cognitive_engine/mastery_update.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func update_mastery
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/engines/cognitive_engine/retention_decay.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func apply_decay
+Dependencies (imports): math
+Used by: No internal imports detected
+
+File: backend/engines/intervention_engine/decision.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/adaptive_logic.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func determine_difficulty
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/engine.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func generate_next_question
+Dependencies (imports): engines.quiz_engine.adaptive_logic.determine_difficulty, engines.quiz_engine.quiz_selector.select_concept
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/exploration.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func should_explore
+Dependencies (imports): random
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/quiz_selector.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func compute_priority_score, func select_concept
+Dependencies (imports): engines.quiz_engine.exploration.should_explore, engines.quiz_engine.utils.choose_random_concept
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/tests/test_adaptive.py
+Purpose: Automated test module.
+Contains: func run_all, func test_high_risk_easy, func test_high_streak_and_high_mastery_hard, func test_low_streak_easy
+Dependencies (imports): engines.quiz_engine.adaptive_logic.determine_difficulty
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/tests/test_engine.py
+Purpose: Automated test module.
+Contains: func run_all, func test_generate_next_question_combines_outputs, func test_generate_next_question_high_risk_reason_and_easy
+Dependencies (imports): engines.quiz_engine.engine.generate_next_question, engines.quiz_engine.quiz_selector
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/tests/test_exploration.py
+Purpose: Automated test module.
+Contains: func run_all, func test_exploration_rate_approximate, func test_explore_always_when_epsilon_one
+Dependencies (imports): engines.quiz_engine.exploration.should_explore, engines.quiz_engine.utils.is_close, random
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/tests/test_selector.py
+Purpose: Automated test module.
+Contains: func run_all, func test_high_risk_overrides_repetition_rule, func test_lowest_mastery_gets_selected, func test_recent_concept_penalty_works
+Dependencies (imports): engines.quiz_engine.quiz_selector
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/tests/test_utils.py
+Purpose: Automated test module.
+Contains: func run_all, func test_is_close_true_case
+Dependencies (imports): engines.quiz_engine.utils.is_close
+Used by: No internal imports detected
+
+File: backend/engines/quiz_engine/utils.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func choose_random_concept, func is_close
+Dependencies (imports): random
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/feature_extractor.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func build_feature_vector, func compute_accuracy, func compute_recency
+Dependencies (imports): math
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/predictor.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func predict_risk
+Dependencies (imports): engines.risk_engine.feature_extractor.build_feature_vector, engines.risk_engine.risk_model.predict_probability
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/risk_model.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func linear_combination, func predict_probability, func sigmoid
+Dependencies (imports): math
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/tests/test_features.py
+Purpose: Automated test module.
+Contains: func run_all, func test_build_feature_vector_order_and_values, func test_compute_accuracy_normal, func test_compute_accuracy_zero_attempts, func test_compute_recency_clamped_non_negative, func test_compute_recency_decay_behavior
+Dependencies (imports): engines.risk_engine.feature_extractor.build_feature_vector, engines.risk_engine.feature_extractor.compute_accuracy, engines.risk_engine.feature_extractor.compute_recency, engines.risk_engine.utils.is_close, math
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/tests/test_model.py
+Purpose: Automated test module.
+Contains: func run_all, func test_linear_combination_manual_case, func test_monotonicity_higher_mastery_lower_error, func test_predict_probability_matches_manual_value, func test_sigmoid_zero
+Dependencies (imports): engines.risk_engine.risk_model.linear_combination, engines.risk_engine.risk_model.predict_probability, engines.risk_engine.risk_model.sigmoid, engines.risk_engine.utils.is_close, math
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/tests/test_predictor.py
+Purpose: Automated test module.
+Contains: func run_all, func test_predictor_low_risk_case, func test_predictor_output_features_values
+Dependencies (imports): engines.risk_engine.predictor.predict_risk, engines.risk_engine.utils.is_close, math
+Used by: No internal imports detected
+
+File: backend/engines/risk_engine/utils.py
+Purpose: Pure engine logic (adaptive/risk/cognitive/AI).
+Contains: func is_close
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/main.py
+Purpose: Backend app entrypoint exposing FastAPI app.
+Contains: None (empty file).
+Dependencies (imports): api.main.app
+Used by: No internal imports detected
+
+File: backend/models/cognitive_model.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/models/session_model.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/models/user_model.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/orchestrator/quiz_orchestrator.py
+Purpose: Quiz orchestration/session coordination logic.
+Contains: func _build_concepts_and_risks, func _compute_current_streak, func _sync_recent_questions_memory, func end_session, func start_session, func submit_answer
+Dependencies (imports): datetime.datetime, db.crud.get_mastery_state, db.crud.log_attempt, db.crud.upsert_mastery_state, engines.ai_generation.explanation_generator.generate_explanation, engines.ai_generation.question_generator.RECENT_QUESTIONS_QUEUE, engines.ai_generation.question_generator.generate_question, engines.cognitive_engine.confidence_model.update_confidence, engines.cognitive_engine.mastery_update.update_mastery, engines.cognitive_engine.retention_decay.apply_decay, engines.quiz_engine.engine.generate_next_question, engines.risk_engine.predictor.predict_risk, orchestrator.session_manager.create_session, orchestrator.session_manager.get_session, orchestrator.session_manager.update_session, orchestrator.utils.build_concept_id, orchestrator.utils.datetime_to_unix_timestamp, orchestrator.utils.get_avg_time_for_concept, orchestrator.utils.get_default_concepts, orchestrator.utils.is_strong_concept, orchestrator.utils.is_weak_concept, orchestrator.utils.validate_num_questions, orchestrator.utils.validate_submit_input, services.session_service.get_last_questions, services.session_service.get_session_question_record, services.session_service.store_session_question, services.user_service.get_concept_attempt_stats, services.user_service.get_session_attempts, services.user_service.get_user_mastery_states, services.user_service.get_user_record, sqlalchemy.orm.Session, uuid.UUID, uuid.uuid4
+Used by: No internal imports detected
+
+File: backend/orchestrator/schemas.py
+Purpose: Quiz orchestration/session coordination logic.
+Contains: class QuestionResponse, class SessionSummary, class StartSessionRequest, class SubmitAnswerRequest
+Dependencies (imports): pydantic.BaseModel, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/orchestrator/session_manager.py
+Purpose: Quiz orchestration/session coordination logic.
+Contains: func create_session, func get_session, func update_session
+Dependencies (imports): services.session_service.create_session_record, services.session_service.get_session_record, services.session_service.update_session_record, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/orchestrator/tests/test_quiz_orchestrator.py
+Purpose: Automated test module.
+Contains: func _build_test_session, func _mock_generate_explanation, func _mock_generate_question, func run_all, func test_end_session_returns_summary, func test_start_session_returns_first_question, func test_submit_answer_computes_correctness_from_db_question
+Dependencies (imports): db.crud.create_user, db.database, orchestrator.quiz_orchestrator, os, pathlib.Path, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sys, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/orchestrator/tests/test_schemas.py
+Purpose: Automated test module.
+Contains: func run_all, func test_question_response_schema, func test_session_summary_schema, func test_start_session_request_schema, func test_submit_answer_request_schema
+Dependencies (imports): orchestrator.schemas.QuestionResponse, orchestrator.schemas.SessionSummary, orchestrator.schemas.StartSessionRequest, orchestrator.schemas.SubmitAnswerRequest, pathlib.Path, sys, uuid
+Used by: No internal imports detected
+
+File: backend/orchestrator/tests/test_session_manager.py
+Purpose: Automated test module.
+Contains: func _build_test_session, func run_all, func test_create_get_update_session_manager_flow
+Dependencies (imports): db.crud.create_user, db.database, orchestrator.session_manager.create_session, orchestrator.session_manager.get_session, orchestrator.session_manager.update_session, os, pathlib.Path, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sys
+Used by: No internal imports detected
+
+File: backend/orchestrator/tests/test_utils.py
+Purpose: Automated test module.
+Contains: func run_all, func test_build_concept_id, func test_datetime_to_unix_timestamp_returns_float, func test_get_avg_time_config_lookup, func test_get_default_concepts_lookup, func test_validate_num_questions_valid, func test_validate_submit_input_valid, func test_weak_and_strong_threshold_helpers
+Dependencies (imports): datetime.datetime, orchestrator.utils.build_concept_id, orchestrator.utils.datetime_to_unix_timestamp, orchestrator.utils.get_avg_time_for_concept, orchestrator.utils.get_default_concepts, orchestrator.utils.is_strong_concept, orchestrator.utils.is_weak_concept, orchestrator.utils.validate_num_questions, orchestrator.utils.validate_submit_input, pathlib.Path, sys
+Used by: No internal imports detected
+
+File: backend/orchestrator/utils.py
+Purpose: Quiz orchestration/session coordination logic.
+Contains: func build_concept_id, func datetime_to_unix_timestamp, func get_avg_time_for_concept, func get_default_concepts, func is_strong_concept, func is_weak_concept, func validate_num_questions, func validate_submit_input
+Dependencies (imports): datetime.datetime, datetime.timezone
+Used by: No internal imports detected
+
+File: backend/requirements.txt
+Purpose: Python dependency manifest.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: backend/schemas/auth_schemas.py
+Purpose: Source module.
+Contains: class LoginRequest, class LoginResponse, class SignupRequest, class SignupResponse
+Dependencies (imports): pydantic.BaseModel, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/schemas/cognitive_schemas.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/schemas/quiz_schemas.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/schemas/response_schemas.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/services/auth_service.py
+Purpose: Service-layer business operations over CRUD.
+Contains: func create_access_token, func get_user_id_from_token, func hash_password, func login, func require_authenticated_user, func signup, func verify_password
+Dependencies (imports): datetime.datetime, datetime.timedelta, datetime.timezone, db.crud.create_auth_user, db.crud.get_user_by_email, db.crud.get_user_by_id, dotenv.load_dotenv, jwt, os, passlib.context.CryptContext, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/services/session_service.py
+Purpose: Service-layer business operations over CRUD.
+Contains: func create_session_record, func get_last_questions, func get_session_question_record, func get_session_record, func store_session_question, func update_session_record
+Dependencies (imports): db.crud.create_session, db.crud.create_session_question, db.crud.get_recent_session_questions, db.crud.get_session, db.crud.get_session_question, db.crud.update_session, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/services/tests/test_auth_service.py
+Purpose: Automated test module.
+Contains: func _build_test_session, func run_all, func test_login_returns_jwt_token, func test_require_authenticated_user_returns_db_user, func test_signup_creates_user
+Dependencies (imports): db.database, os, pathlib.Path, services.auth_service.get_user_id_from_token, services.auth_service.login, services.auth_service.require_authenticated_user, services.auth_service.signup, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sys
+Used by: No internal imports detected
+
+File: backend/services/tests/test_session_service.py
+Purpose: Automated test module.
+Contains: func _build_test_session, func run_all, func test_create_and_get_session_record, func test_question_store_and_fetch_and_recent, func test_update_session_record
+Dependencies (imports): db.crud.create_user, db.database, os, pathlib.Path, services.session_service.create_session_record, services.session_service.get_last_questions, services.session_service.get_session_question_record, services.session_service.get_session_record, services.session_service.store_session_question, services.session_service.update_session_record, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sys
+Used by: No internal imports detected
+
+File: backend/services/tests/test_user_service.py
+Purpose: Automated test module.
+Contains: func _build_test_session, func run_all, func test_attempt_stats_and_session_attempts, func test_get_user_mastery_states, func test_get_user_record
+Dependencies (imports): datetime.datetime, db.crud.create_user, db.crud.log_attempt, db.crud.upsert_mastery_state, db.database, os, pathlib.Path, services.user_service.get_concept_attempt_stats, services.user_service.get_session_attempts, services.user_service.get_user_mastery_states, services.user_service.get_user_record, sqlalchemy.create_engine, sqlalchemy.orm.sessionmaker, sys
+Used by: No internal imports detected
+
+File: backend/services/user_service.py
+Purpose: Service-layer business operations over CRUD.
+Contains: func get_concept_attempt_stats, func get_session_attempts, func get_user_mastery_states, func get_user_record
+Dependencies (imports): datetime.datetime, db.crud.get_attempt_stats_for_concept, db.crud.get_user_by_id, db.crud.list_attempts_for_session_window, db.crud.list_mastery_states_for_user, sqlalchemy.orm.Session, uuid.UUID
+Used by: No internal imports detected
+
+File: backend/tests/test_cognitive_engine.py
+Purpose: Automated test module.
+Contains: func run_all_cognitive_engine_tests, func test_apply_decay_spec_case, func test_propagate_mastery_spec_case, func test_update_confidence_spec_case, func test_update_mastery_spec_case
+Dependencies (imports): engines.cognitive_engine.confidence_model.update_confidence, engines.cognitive_engine.dependency_propagation.propagate_mastery, engines.cognitive_engine.mastery_update.update_mastery, engines.cognitive_engine.retention_decay.apply_decay, pathlib.Path, sys
+Used by: No internal imports detected
+
+File: backend/utils/helpers.py
+Purpose: Source module.
+Contains: func is_close
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/utils/logger.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: backend/utils/validators.py
+Purpose: Empty scaffold placeholder; no runtime behavior.
+Contains: None (empty file).
+Dependencies (imports): None
+Used by: No internal imports detected
+
+File: cognitive_engine.md
+Purpose: Specification/architecture document.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: database.md
+Purpose: Specification/architecture document.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: main.md
+Purpose: Specification/architecture document.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: quiz_engine.md
+Purpose: Specification/architecture document.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A
+
+File: risk_engine.md
+Purpose: Specification/architecture document.
+Contains: N/A
+Dependencies (imports): N/A
+Used by: N/A

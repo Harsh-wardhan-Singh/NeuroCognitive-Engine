@@ -1,16 +1,12 @@
 import json
-from collections import deque
 from engines.ai_generation.llm_client import generate_text
 from engines.ai_generation.prompt_templates import build_question_prompt
+
 QUESTION_TEMPERATURE = 0.7
 QUESTION_MAX_TOKENS = 256
 MAX_PARSE_VALIDATION_ATTEMPTS = 2
-RECENT_QUESTIONS_MAX_SIZE = 10
-RECENT_QUESTIONS_QUEUE = deque(maxlen=RECENT_QUESTIONS_MAX_SIZE)
-def _get_recent_questions_list():
-	return list(RECENT_QUESTIONS_QUEUE)
-def _update_recent_questions(question):
-	RECENT_QUESTIONS_QUEUE.append(question)
+
+
 def _validate_question_payload(payload):
 	if not isinstance(payload, dict):
 		raise ValueError("LLM output must be a JSON object.")
@@ -32,18 +28,18 @@ def _validate_question_payload(payload):
 		raise ValueError("'correct_answer' must be a string.")
 	if payload["correct_answer"] not in payload["options"]:
 		raise ValueError("'correct_answer' must match one option.")
-def generate_question(concept, difficulty):
+
+
+def generate_question(concept, difficulty, previous_questions):
 	last_error = None
 	for _ in range(MAX_PARSE_VALIDATION_ATTEMPTS):
 		try:
-			recent_questions = _get_recent_questions_list()
-			prompt = build_question_prompt(concept, difficulty, recent_questions)
+			prompt = build_question_prompt(concept, difficulty, previous_questions)
 			raw_output = generate_text(prompt, QUESTION_TEMPERATURE, QUESTION_MAX_TOKENS)
 			parsed_output = json.loads(raw_output)
 			_validate_question_payload(parsed_output)
-			if parsed_output["question"] in recent_questions:
+			if parsed_output["question"] in previous_questions:
 				raise ValueError("Generated question repeats a recent question.")
-			_update_recent_questions(parsed_output["question"])
 			return {
 				"question": parsed_output["question"],
 				"options": parsed_output["options"],

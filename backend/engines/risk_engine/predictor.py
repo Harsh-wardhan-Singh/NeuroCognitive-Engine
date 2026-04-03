@@ -1,12 +1,14 @@
+from config.settings import RISK_HIGH_THRESHOLD, RISK_MEDIUM_THRESHOLD, RISK_TOLERANCE
 from engines.risk_engine.feature_extractor import build_feature_vector
 from engines.risk_engine.risk_model import predict_probability
+
+
 def predict_risk(concept_data, current_time):
 	features = build_feature_vector(concept_data, current_time)
 	p_error = predict_probability(features)
-	tolerance = 1e-5
-	if p_error > 0.7 + tolerance:
+	if p_error > RISK_HIGH_THRESHOLD + RISK_TOLERANCE:
 		risk_level = "HIGH"
-	elif p_error > 0.4 + tolerance:
+	elif p_error > RISK_MEDIUM_THRESHOLD + RISK_TOLERANCE:
 		risk_level = "MEDIUM"
 	else:
 		risk_level = "LOW"

@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 def _reload_database_module_with_env(database_url):
     if database_url is None:
-        os.environ.pop("DATABASE_URL", None)
+        os.environ["DATABASE_URL"] = ""
     else:
         os.environ["DATABASE_URL"] = database_url
 

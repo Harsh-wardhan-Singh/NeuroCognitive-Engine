@@ -25,7 +25,7 @@ def test_init_db_creates_all_tables() -> None:
 
     init_db_module.init_db()
 
-    expected = {"users", "attempts", "mastery_state"}
+    expected = {"users", "attempts", "mastery_state", "sessions", "session_questions"}
     actual = set(inspect(database_module.engine).get_table_names())
 
     print("Expected:", expected)

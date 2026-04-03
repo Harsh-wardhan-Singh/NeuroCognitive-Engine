@@ -3,3 +3,8 @@ python-dotenv
 SQLAlchemy
 psycopg2-binary
 pydantic
+fastapi
+PyJWT
+passlib[bcrypt]
+bcrypt==3.2.2
+httpx

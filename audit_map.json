@@ -1,0 +1,1534 @@
+[
+  {
+    "file": ".env",
+    "is_py": false
+  },
+  {
+    "file": ".gitignore",
+    "is_py": false
+  },
+  {
+    "file": ".vscode/settings.json",
+    "is_py": false
+  },
+  {
+    "file": "ai_generation.md",
+    "is_py": false
+  },
+  {
+    "file": "backend\\api\\deps.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "get_current_user_id",
+      "get_db_session"
+    ],
+    "classes": [],
+    "imports": [
+      "db.database.get_db",
+      "fastapi.Depends",
+      "fastapi.HTTPException",
+      "fastapi.security.HTTPAuthorizationCredentials",
+      "fastapi.security.HTTPBearer",
+      "services.auth_service.get_user_id_from_token",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\main.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [],
+    "classes": [],
+    "imports": [
+      "api.routes.auth.router",
+      "api.routes.quiz.router",
+      "fastapi.FastAPI"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\routes\\auth.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "login_route",
+      "signup_route"
+    ],
+    "classes": [],
+    "imports": [
+      "api.deps.get_db_session",
+      "fastapi.APIRouter",
+      "fastapi.Depends",
+      "fastapi.HTTPException",
+      "schemas.auth_schemas.LoginRequest",
+      "schemas.auth_schemas.LoginResponse",
+      "schemas.auth_schemas.SignupRequest",
+      "schemas.auth_schemas.SignupResponse",
+      "services.auth_service.login",
+      "services.auth_service.signup",
+      "sqlalchemy.orm.Session"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\routes\\auth_routes.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\routes\\quiz.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "end_session_route",
+      "start_session_route",
+      "submit_answer_route"
+    ],
+    "classes": [],
+    "imports": [
+      "api.deps.get_current_user_id",
+      "api.deps.get_db_session",
+      "fastapi.APIRouter",
+      "fastapi.Depends",
+      "fastapi.HTTPException",
+      "orchestrator.quiz_orchestrator.end_session",
+      "orchestrator.quiz_orchestrator.start_session",
+      "orchestrator.quiz_orchestrator.submit_answer",
+      "orchestrator.schemas.StartSessionRequest",
+      "orchestrator.schemas.SubmitAnswerRequest",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\routes\\quiz_routes.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\routes\\user_routes.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\tests\\test_auth_routes.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_app_and_db",
+      "_override_get_db",
+      "run_all",
+      "test_signup_and_login_routes"
+    ],
+    "classes": [],
+    "imports": [
+      "api.deps.get_db_session",
+      "api.routes.auth.router",
+      "db.database",
+      "fastapi.FastAPI",
+      "fastapi.testclient.TestClient",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sqlalchemy.pool.StaticPool",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\tests\\test_auth_schemas.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_login_response_schema",
+      "test_signup_request_schema",
+      "test_signup_response_schema"
+    ],
+    "classes": [],
+    "imports": [
+      "pathlib.Path",
+      "schemas.auth_schemas.LoginRequest",
+      "schemas.auth_schemas.LoginResponse",
+      "schemas.auth_schemas.SignupRequest",
+      "schemas.auth_schemas.SignupResponse",
+      "sys",
+      "uuid"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\tests\\test_deps.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_get_current_user_id_from_bearer_token"
+    ],
+    "classes": [],
+    "imports": [
+      "api.deps.get_current_user_id",
+      "fastapi.security.HTTPAuthorizationCredentials",
+      "os",
+      "pathlib.Path",
+      "services.auth_service.create_access_token",
+      "sys",
+      "uuid.uuid4"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\tests\\test_main_app.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_app_includes_auth_and_quiz_routes"
+    ],
+    "classes": [],
+    "imports": [
+      "api.main.app",
+      "pathlib.Path",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\api\\tests\\test_quiz_routes.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_app_and_db",
+      "_mock_generate_explanation",
+      "_mock_generate_question",
+      "_override_get_db",
+      "run_all",
+      "test_protected_quiz_flow_routes"
+    ],
+    "classes": [],
+    "imports": [
+      "api.deps.get_db_session",
+      "api.routes.auth.router",
+      "api.routes.quiz.router",
+      "db.database",
+      "fastapi.FastAPI",
+      "fastapi.testclient.TestClient",
+      "orchestrator.quiz_orchestrator",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sqlalchemy.pool.StaticPool",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\config\\constants.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\config\\settings.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\data\\concept_graphs\\probability_graph.json",
+    "is_py": false
+  },
+  {
+    "file": "backend\\data\\question_bank\\probability_questions.json",
+    "is_py": false
+  },
+  {
+    "file": "backend\\db\\crud.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "create_auth_user",
+      "create_session",
+      "create_session_question",
+      "create_user",
+      "get_attempt_stats_for_concept",
+      "get_mastery_state",
+      "get_recent_session_questions",
+      "get_session",
+      "get_session_question",
+      "get_user_by_email",
+      "get_user_by_id",
+      "list_attempts_for_session_window",
+      "list_mastery_states_for_user",
+      "log_attempt",
+      "update_session",
+      "upsert_mastery_state"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.models.Attempt",
+      "db.models.MasteryState",
+      "db.models.Session",
+      "db.models.SessionQuestion",
+      "db.models.User",
+      "db.schemas.AttemptCreate",
+      "db.schemas.AuthUserCreate",
+      "db.schemas.MasteryStateRead",
+      "db.schemas.MasteryUpdate",
+      "db.schemas.SessionCreate",
+      "db.schemas.SessionQuestionCreate",
+      "db.schemas.SessionRead",
+      "db.schemas.SessionUpdate",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\database.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "get_db"
+    ],
+    "classes": [],
+    "imports": [
+      "dotenv.load_dotenv",
+      "os",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.declarative_base",
+      "sqlalchemy.orm.sessionmaker"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\init_db.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "init_db"
+    ],
+    "classes": [],
+    "imports": [
+      "db.database.Base",
+      "db.database.engine",
+      "db.models.Attempt",
+      "db.models.MasteryState",
+      "db.models.Session",
+      "db.models.SessionQuestion",
+      "db.models.User",
+      "pathlib.Path",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\models.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [],
+    "classes": [
+      "Attempt",
+      "MasteryState",
+      "Session",
+      "SessionQuestion",
+      "User"
+    ],
+    "imports": [
+      "datetime.datetime",
+      "db.database.Base",
+      "sqlalchemy.Boolean",
+      "sqlalchemy.DateTime",
+      "sqlalchemy.Float",
+      "sqlalchemy.ForeignKey",
+      "sqlalchemy.Integer",
+      "sqlalchemy.JSON",
+      "sqlalchemy.PrimaryKeyConstraint",
+      "sqlalchemy.String",
+      "sqlalchemy.UniqueConstraint",
+      "sqlalchemy.Uuid",
+      "sqlalchemy.orm.Mapped",
+      "sqlalchemy.orm.mapped_column",
+      "uuid"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\schemas.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [],
+    "classes": [
+      "AttemptCreate",
+      "AuthUserCreate",
+      "AuthUserRead",
+      "MasteryStateRead",
+      "MasteryUpdate",
+      "SessionCreate",
+      "SessionQuestionCreate",
+      "SessionQuestionRead",
+      "SessionRead",
+      "SessionUpdate",
+      "UserCreate"
+    ],
+    "imports": [
+      "datetime.datetime",
+      "pydantic.BaseModel",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\tests\\test_crud.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_session",
+      "run_all",
+      "test_create_auth_user_and_lookup_by_email",
+      "test_create_user_returns_uuid",
+      "test_get_attempt_stats_for_concept",
+      "test_get_mastery_state_returns_3_field_dict",
+      "test_log_attempt_inserts_row",
+      "test_session_create_get_update_flow",
+      "test_session_question_storage_and_correct_option_fetch",
+      "test_session_window_attempts_and_mastery_list",
+      "test_upsert_mastery_state_updates_existing_row"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.crud.create_auth_user",
+      "db.crud.create_session",
+      "db.crud.create_session_question",
+      "db.crud.create_user",
+      "db.crud.get_attempt_stats_for_concept",
+      "db.crud.get_mastery_state",
+      "db.crud.get_recent_session_questions",
+      "db.crud.get_session",
+      "db.crud.get_session_question",
+      "db.crud.get_user_by_email",
+      "db.crud.list_attempts_for_session_window",
+      "db.crud.list_mastery_states_for_user",
+      "db.crud.log_attempt",
+      "db.crud.update_session",
+      "db.crud.upsert_mastery_state",
+      "db.database",
+      "db.models.Attempt",
+      "db.models.MasteryState",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sys",
+      "uuid"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\tests\\test_database.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_reload_database_module_with_env",
+      "run_all",
+      "test_database_url_is_required",
+      "test_engine_and_session_creation",
+      "test_get_db_yields_session_object"
+    ],
+    "classes": [],
+    "imports": [
+      "importlib",
+      "os",
+      "pathlib.Path",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\tests\\test_init_db.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_init_db_creates_all_tables"
+    ],
+    "classes": [],
+    "imports": [
+      "importlib",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.inspect",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\tests\\test_models.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_attempt_has_correct_column_name",
+      "test_mastery_state_has_composite_key",
+      "test_session_questions_unique_per_session",
+      "test_table_names_exist",
+      "test_user_id_is_uuid_instance",
+      "test_users_has_auth_fields"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.database.Base",
+      "db.models.User",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.inspect",
+      "sqlalchemy.orm.sessionmaker",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\db\\tests\\test_schemas.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_attempt_create_schema_fields",
+      "test_auth_user_create_schema_fields",
+      "test_mastery_state_read_schema_fields",
+      "test_mastery_update_schema_fields",
+      "test_session_create_schema_fields",
+      "test_session_question_create_schema_fields",
+      "test_session_update_schema_fields",
+      "test_user_create_is_empty_schema"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.schemas.AttemptCreate",
+      "db.schemas.AuthUserCreate",
+      "db.schemas.MasteryStateRead",
+      "db.schemas.MasteryUpdate",
+      "db.schemas.SessionCreate",
+      "db.schemas.SessionQuestionCreate",
+      "db.schemas.SessionUpdate",
+      "db.schemas.UserCreate",
+      "pathlib.Path",
+      "sys",
+      "uuid"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\explanation_generator.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "generate_explanation"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.ai_generation.llm_client.generate_text",
+      "engines.ai_generation.prompt_templates.build_explanation_prompt",
+      "json"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\llm_client.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_extract_raw_text",
+      "generate_text"
+    ],
+    "classes": [],
+    "imports": [
+      "dotenv.load_dotenv",
+      "os",
+      "requests",
+      "time"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\prompt_templates.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "build_explanation_prompt",
+      "build_question_prompt"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\question_generator.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_get_recent_questions_list",
+      "_update_recent_questions",
+      "_validate_question_payload",
+      "generate_question"
+    ],
+    "classes": [],
+    "imports": [
+      "collections.deque",
+      "engines.ai_generation.llm_client.generate_text",
+      "engines.ai_generation.prompt_templates.build_question_prompt",
+      "json"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\tests\\test_explanation_generator.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "mock_generate_text",
+      "run_all",
+      "test_generate_explanation_parse_failure_fallback",
+      "test_generate_explanation_valid_json"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.ai_generation.explanation_generator"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\tests\\test_llm_client.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "__init__",
+      "json",
+      "mock_post",
+      "raise_for_status",
+      "run_all",
+      "test_generate_text_fails_after_three_attempts",
+      "test_generate_text_retries_then_success",
+      "test_generate_text_success_chat_completion_shape",
+      "test_generate_text_success_first_try"
+    ],
+    "classes": [
+      "MockResponse"
+    ],
+    "imports": [
+      "engines.ai_generation.llm_client",
+      "os"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\tests\\test_prompt_templates.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_build_explanation_prompt_contains_required_constraints",
+      "test_build_question_prompt_contains_required_constraints",
+      "test_build_question_prompt_includes_recent_questions_block"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.ai_generation.prompt_templates.build_explanation_prompt",
+      "engines.ai_generation.prompt_templates.build_question_prompt"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\ai_generation\\tests\\test_question_generator.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "mock_generate_text",
+      "run_all",
+      "test_generate_question_algebra_hard",
+      "test_generate_question_probability_easy",
+      "test_generate_question_retries_once_then_succeeds",
+      "test_recent_questions_queue_keeps_only_last_ten"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.ai_generation.question_generator"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\cognitive_engine\\confidence_model.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "update_confidence"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\cognitive_engine\\dependency_propagation.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "propagate_mastery"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\cognitive_engine\\mastery_update.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "update_mastery"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\cognitive_engine\\retention_decay.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "apply_decay"
+    ],
+    "classes": [],
+    "imports": [
+      "math"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\intervention_engine\\decision.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\adaptive_logic.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "determine_difficulty"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\engine.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "generate_next_question"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.adaptive_logic.determine_difficulty",
+      "engines.quiz_engine.quiz_selector.select_concept"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\exploration.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "should_explore"
+    ],
+    "classes": [],
+    "imports": [
+      "random"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\quiz_selector.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "compute_priority_score",
+      "select_concept"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.exploration.should_explore",
+      "engines.quiz_engine.utils.choose_random_concept"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\tests\\test_adaptive.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_high_risk_easy",
+      "test_high_streak_and_high_mastery_hard",
+      "test_low_streak_easy"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.adaptive_logic.determine_difficulty"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\tests\\test_engine.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_generate_next_question_combines_outputs",
+      "test_generate_next_question_high_risk_reason_and_easy"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.engine.generate_next_question",
+      "engines.quiz_engine.quiz_selector"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\tests\\test_exploration.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_exploration_rate_approximate",
+      "test_explore_always_when_epsilon_one"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.exploration.should_explore",
+      "engines.quiz_engine.utils.is_close",
+      "random"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\tests\\test_selector.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_high_risk_overrides_repetition_rule",
+      "test_lowest_mastery_gets_selected",
+      "test_recent_concept_penalty_works"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.quiz_selector"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\tests\\test_utils.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_is_close_true_case"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.quiz_engine.utils.is_close"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\quiz_engine\\utils.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "choose_random_concept",
+      "is_close"
+    ],
+    "classes": [],
+    "imports": [
+      "random"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\feature_extractor.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "build_feature_vector",
+      "compute_accuracy",
+      "compute_recency"
+    ],
+    "classes": [],
+    "imports": [
+      "math"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\predictor.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "predict_risk"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.risk_engine.feature_extractor.build_feature_vector",
+      "engines.risk_engine.risk_model.predict_probability"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\risk_model.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "linear_combination",
+      "predict_probability",
+      "sigmoid"
+    ],
+    "classes": [],
+    "imports": [
+      "math"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\tests\\test_features.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_build_feature_vector_order_and_values",
+      "test_compute_accuracy_normal",
+      "test_compute_accuracy_zero_attempts",
+      "test_compute_recency_clamped_non_negative",
+      "test_compute_recency_decay_behavior"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.risk_engine.feature_extractor.build_feature_vector",
+      "engines.risk_engine.feature_extractor.compute_accuracy",
+      "engines.risk_engine.feature_extractor.compute_recency",
+      "engines.risk_engine.utils.is_close",
+      "math"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\tests\\test_model.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_linear_combination_manual_case",
+      "test_monotonicity_higher_mastery_lower_error",
+      "test_predict_probability_matches_manual_value",
+      "test_sigmoid_zero"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.risk_engine.risk_model.linear_combination",
+      "engines.risk_engine.risk_model.predict_probability",
+      "engines.risk_engine.risk_model.sigmoid",
+      "engines.risk_engine.utils.is_close",
+      "math"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\tests\\test_predictor.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_predictor_low_risk_case",
+      "test_predictor_output_features_values"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.risk_engine.predictor.predict_risk",
+      "engines.risk_engine.utils.is_close",
+      "math"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\engines\\risk_engine\\utils.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "is_close"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\main.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [],
+    "classes": [],
+    "imports": [
+      "api.main.app"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\models\\cognitive_model.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\models\\session_model.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\models\\user_model.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\quiz_orchestrator.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_concepts_and_risks",
+      "_compute_current_streak",
+      "_sync_recent_questions_memory",
+      "end_session",
+      "start_session",
+      "submit_answer"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.crud.get_mastery_state",
+      "db.crud.log_attempt",
+      "db.crud.upsert_mastery_state",
+      "engines.ai_generation.explanation_generator.generate_explanation",
+      "engines.ai_generation.question_generator.RECENT_QUESTIONS_QUEUE",
+      "engines.ai_generation.question_generator.generate_question",
+      "engines.cognitive_engine.confidence_model.update_confidence",
+      "engines.cognitive_engine.mastery_update.update_mastery",
+      "engines.cognitive_engine.retention_decay.apply_decay",
+      "engines.quiz_engine.engine.generate_next_question",
+      "engines.risk_engine.predictor.predict_risk",
+      "orchestrator.session_manager.create_session",
+      "orchestrator.session_manager.get_session",
+      "orchestrator.session_manager.update_session",
+      "orchestrator.utils.build_concept_id",
+      "orchestrator.utils.datetime_to_unix_timestamp",
+      "orchestrator.utils.get_avg_time_for_concept",
+      "orchestrator.utils.get_default_concepts",
+      "orchestrator.utils.is_strong_concept",
+      "orchestrator.utils.is_weak_concept",
+      "orchestrator.utils.validate_num_questions",
+      "orchestrator.utils.validate_submit_input",
+      "services.session_service.get_last_questions",
+      "services.session_service.get_session_question_record",
+      "services.session_service.store_session_question",
+      "services.user_service.get_concept_attempt_stats",
+      "services.user_service.get_session_attempts",
+      "services.user_service.get_user_mastery_states",
+      "services.user_service.get_user_record",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID",
+      "uuid.uuid4"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\schemas.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [],
+    "classes": [
+      "QuestionResponse",
+      "SessionSummary",
+      "StartSessionRequest",
+      "SubmitAnswerRequest"
+    ],
+    "imports": [
+      "pydantic.BaseModel",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\session_manager.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "create_session",
+      "get_session",
+      "update_session"
+    ],
+    "classes": [],
+    "imports": [
+      "services.session_service.create_session_record",
+      "services.session_service.get_session_record",
+      "services.session_service.update_session_record",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\tests\\test_quiz_orchestrator.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_session",
+      "_mock_generate_explanation",
+      "_mock_generate_question",
+      "run_all",
+      "test_end_session_returns_summary",
+      "test_start_session_returns_first_question",
+      "test_submit_answer_computes_correctness_from_db_question"
+    ],
+    "classes": [],
+    "imports": [
+      "db.crud.create_user",
+      "db.database",
+      "orchestrator.quiz_orchestrator",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sys",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\tests\\test_schemas.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_question_response_schema",
+      "test_session_summary_schema",
+      "test_start_session_request_schema",
+      "test_submit_answer_request_schema"
+    ],
+    "classes": [],
+    "imports": [
+      "orchestrator.schemas.QuestionResponse",
+      "orchestrator.schemas.SessionSummary",
+      "orchestrator.schemas.StartSessionRequest",
+      "orchestrator.schemas.SubmitAnswerRequest",
+      "pathlib.Path",
+      "sys",
+      "uuid"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\tests\\test_session_manager.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_session",
+      "run_all",
+      "test_create_get_update_session_manager_flow"
+    ],
+    "classes": [],
+    "imports": [
+      "db.crud.create_user",
+      "db.database",
+      "orchestrator.session_manager.create_session",
+      "orchestrator.session_manager.get_session",
+      "orchestrator.session_manager.update_session",
+      "os",
+      "pathlib.Path",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\tests\\test_utils.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all",
+      "test_build_concept_id",
+      "test_datetime_to_unix_timestamp_returns_float",
+      "test_get_avg_time_config_lookup",
+      "test_get_default_concepts_lookup",
+      "test_validate_num_questions_valid",
+      "test_validate_submit_input_valid",
+      "test_weak_and_strong_threshold_helpers"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "orchestrator.utils.build_concept_id",
+      "orchestrator.utils.datetime_to_unix_timestamp",
+      "orchestrator.utils.get_avg_time_for_concept",
+      "orchestrator.utils.get_default_concepts",
+      "orchestrator.utils.is_strong_concept",
+      "orchestrator.utils.is_weak_concept",
+      "orchestrator.utils.validate_num_questions",
+      "orchestrator.utils.validate_submit_input",
+      "pathlib.Path",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\orchestrator\\utils.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "build_concept_id",
+      "datetime_to_unix_timestamp",
+      "get_avg_time_for_concept",
+      "get_default_concepts",
+      "is_strong_concept",
+      "is_weak_concept",
+      "validate_num_questions",
+      "validate_submit_input"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "datetime.timezone"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\requirements.txt",
+    "is_py": false
+  },
+  {
+    "file": "backend\\schemas\\auth_schemas.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [],
+    "classes": [
+      "LoginRequest",
+      "LoginResponse",
+      "SignupRequest",
+      "SignupResponse"
+    ],
+    "imports": [
+      "pydantic.BaseModel",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\schemas\\cognitive_schemas.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\schemas\\quiz_schemas.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\schemas\\response_schemas.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\services\\auth_service.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "create_access_token",
+      "get_user_id_from_token",
+      "hash_password",
+      "login",
+      "require_authenticated_user",
+      "signup",
+      "verify_password"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "datetime.timedelta",
+      "datetime.timezone",
+      "db.crud.create_auth_user",
+      "db.crud.get_user_by_email",
+      "db.crud.get_user_by_id",
+      "dotenv.load_dotenv",
+      "jwt",
+      "os",
+      "passlib.context.CryptContext",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\services\\session_service.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "create_session_record",
+      "get_last_questions",
+      "get_session_question_record",
+      "get_session_record",
+      "store_session_question",
+      "update_session_record"
+    ],
+    "classes": [],
+    "imports": [
+      "db.crud.create_session",
+      "db.crud.create_session_question",
+      "db.crud.get_recent_session_questions",
+      "db.crud.get_session",
+      "db.crud.get_session_question",
+      "db.crud.update_session",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\services\\tests\\test_auth_service.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_session",
+      "run_all",
+      "test_login_returns_jwt_token",
+      "test_require_authenticated_user_returns_db_user",
+      "test_signup_creates_user"
+    ],
+    "classes": [],
+    "imports": [
+      "db.database",
+      "os",
+      "pathlib.Path",
+      "services.auth_service.get_user_id_from_token",
+      "services.auth_service.login",
+      "services.auth_service.require_authenticated_user",
+      "services.auth_service.signup",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\services\\tests\\test_session_service.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_session",
+      "run_all",
+      "test_create_and_get_session_record",
+      "test_question_store_and_fetch_and_recent",
+      "test_update_session_record"
+    ],
+    "classes": [],
+    "imports": [
+      "db.crud.create_user",
+      "db.database",
+      "os",
+      "pathlib.Path",
+      "services.session_service.create_session_record",
+      "services.session_service.get_last_questions",
+      "services.session_service.get_session_question_record",
+      "services.session_service.get_session_record",
+      "services.session_service.store_session_question",
+      "services.session_service.update_session_record",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\services\\tests\\test_user_service.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "_build_test_session",
+      "run_all",
+      "test_attempt_stats_and_session_attempts",
+      "test_get_user_mastery_states",
+      "test_get_user_record"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.crud.create_user",
+      "db.crud.log_attempt",
+      "db.crud.upsert_mastery_state",
+      "db.database",
+      "os",
+      "pathlib.Path",
+      "services.user_service.get_concept_attempt_stats",
+      "services.user_service.get_session_attempts",
+      "services.user_service.get_user_mastery_states",
+      "services.user_service.get_user_record",
+      "sqlalchemy.create_engine",
+      "sqlalchemy.orm.sessionmaker",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\services\\user_service.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "get_concept_attempt_stats",
+      "get_session_attempts",
+      "get_user_mastery_states",
+      "get_user_record"
+    ],
+    "classes": [],
+    "imports": [
+      "datetime.datetime",
+      "db.crud.get_attempt_stats_for_concept",
+      "db.crud.get_user_by_id",
+      "db.crud.list_attempts_for_session_window",
+      "db.crud.list_mastery_states_for_user",
+      "sqlalchemy.orm.Session",
+      "uuid.UUID"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\tests\\test_cognitive_engine.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "run_all_cognitive_engine_tests",
+      "test_apply_decay_spec_case",
+      "test_propagate_mastery_spec_case",
+      "test_update_confidence_spec_case",
+      "test_update_mastery_spec_case"
+    ],
+    "classes": [],
+    "imports": [
+      "engines.cognitive_engine.confidence_model.update_confidence",
+      "engines.cognitive_engine.dependency_propagation.propagate_mastery",
+      "engines.cognitive_engine.mastery_update.update_mastery",
+      "engines.cognitive_engine.retention_decay.apply_decay",
+      "pathlib.Path",
+      "sys"
+    ],
+    "used_by": []
+  },
+  {
+    "file": "backend\\utils\\helpers.py",
+    "is_py": true,
+    "empty": false,
+    "functions": [
+      "is_close"
+    ],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\utils\\logger.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "backend\\utils\\validators.py",
+    "is_py": true,
+    "empty": true,
+    "functions": [],
+    "classes": [],
+    "imports": [],
+    "used_by": []
+  },
+  {
+    "file": "cognitive_engine.md",
+    "is_py": false
+  },
+  {
+    "file": "database.md",
+    "is_py": false
+  },
+  {
+    "file": "main.md",
+    "is_py": false
+  },
+  {
+    "file": "quiz_engine.md",
+    "is_py": false
+  },
+  {
+    "file": "risk_engine.md",
+    "is_py": false
+  }
+]

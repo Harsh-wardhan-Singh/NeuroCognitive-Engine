@@ -5,7 +5,16 @@ import uuid
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from db.schemas import AttemptCreate, MasteryStateRead, MasteryUpdate, UserCreate
+from db.schemas import (
+    AttemptCreate,
+    AuthUserCreate,
+    MasteryStateRead,
+    MasteryUpdate,
+    SessionCreate,
+    SessionQuestionCreate,
+    SessionUpdate,
+    UserCreate,
+)
 
 
 def test_user_create_is_empty_schema() -> None:
@@ -88,11 +97,97 @@ def test_mastery_state_read_schema_fields() -> None:
     assert output == expected
 
 
+def test_auth_user_create_schema_fields() -> None:
+    schema = AuthUserCreate(email="test@example.com", password_hash="hashed")
+    expected = {"email": "test@example.com", "password_hash": "hashed"}
+    output = schema.model_dump()
+
+    print("Expected:", expected)
+    print("Got:", output)
+    assert output == expected
+
+
+def test_session_create_schema_fields() -> None:
+    user_id = uuid.uuid4()
+    schema = SessionCreate(
+        user_id=user_id,
+        subject="math",
+        topic="algebra",
+        total_questions=10,
+        questions_answered=0,
+        current_concept="math.algebra.linear_equations",
+        is_active=True,
+    )
+    expected = {
+        "user_id": user_id,
+        "subject": "math",
+        "topic": "algebra",
+        "total_questions": 10,
+        "questions_answered": 0,
+        "current_concept": "math.algebra.linear_equations",
+        "is_active": True,
+    }
+    output = schema.model_dump()
+
+    print("Expected:", expected)
+    print("Got:", output)
+    assert output == expected
+
+
+def test_session_update_schema_fields() -> None:
+    schema = SessionUpdate(
+        questions_answered=5,
+        current_concept="math.algebra.quadratic_equations",
+        is_active=False,
+    )
+    expected = {
+        "questions_answered": 5,
+        "current_concept": "math.algebra.quadratic_equations",
+        "is_active": False,
+    }
+    output = schema.model_dump()
+
+    print("Expected:", expected)
+    print("Got:", output)
+    assert output == expected
+
+
+def test_session_question_create_schema_fields() -> None:
+    session_id = uuid.uuid4()
+    schema = SessionQuestionCreate(
+        session_id=session_id,
+        question_id="q_1",
+        concept_id="math.algebra.linear_equations",
+        question_text="Solve x + 2 = 5",
+        options=["1", "2", "3", "4"],
+        correct_option="3",
+        difficulty_level="EASY",
+    )
+    expected = {
+        "session_id": session_id,
+        "question_id": "q_1",
+        "concept_id": "math.algebra.linear_equations",
+        "question_text": "Solve x + 2 = 5",
+        "options": ["1", "2", "3", "4"],
+        "correct_option": "3",
+        "difficulty_level": "EASY",
+    }
+    output = schema.model_dump()
+
+    print("Expected:", expected)
+    print("Got:", output)
+    assert output == expected
+
+
 def run_all() -> None:
     test_user_create_is_empty_schema()
     test_attempt_create_schema_fields()
     test_mastery_update_schema_fields()
     test_mastery_state_read_schema_fields()
+    test_auth_user_create_schema_fields()
+    test_session_create_schema_fields()
+    test_session_update_schema_fields()
+    test_session_question_create_schema_fields()
 
 
 if __name__ == "__main__":
